@@ -1,3 +1,4 @@
+import 'package:augmented_reality/screens/cart_page.dart';
 import 'package:augmented_reality/screens/home.dart';
 import 'package:augmented_reality/screens/init.dart';
 import 'package:augmented_reality/screens/login.dart';
@@ -33,6 +34,7 @@ class Main extends StatelessWidget {
       MyRoutes.loginRoute: (context) => LoginPage(),
       MyRoutes.startRoute : (context) => MyApp(), 
       MyRoutes.registerRoute : (context)=> Register(),
+      MyRoutes.cartRoute : (context) => CartPage(),
       // MyRoutes.cartRoute: (context) => CartPage(),
     },
   );

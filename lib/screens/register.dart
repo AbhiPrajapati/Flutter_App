@@ -126,7 +126,9 @@ class _RegisterState extends State<Register> {
                         borderRadius:
                             BorderRadius.circular(changeButton ? 50 : 8),
                         child: InkWell(
-                          onTap: () => moveToHome(context),
+                          onTap: () => {
+                            Navigator.pushNamed(context, MyRoutes.loginRoute),
+                          },
                           child: AnimatedContainer(
                             duration: Duration(seconds: 1),
                             width: changeButton ? 50 : 150,
@@ -138,7 +140,7 @@ class _RegisterState extends State<Register> {
                                     color: Colors.white,
                                   )
                                 : Text(
-                                    "Login",
+                                    "Register",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -147,15 +149,15 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, MyRoutes.loginRoute);
-                        },
-                        child: new Padding(
-                          padding: new EdgeInsets.all(10.0),
-                          child: new Text("Login.."),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     Navigator.pushNamed(context, MyRoutes.loginRoute);
+                      //   },
+                      //   child: new Padding(
+                      //     padding: new EdgeInsets.all(10.0),
+                      //     child: new Text("Login Screen"),
+                      //   ),
+                      // ),
                     ],
                   ),
                 )

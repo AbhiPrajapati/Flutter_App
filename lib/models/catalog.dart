@@ -1,7 +1,14 @@
 import 'dart:convert';
 
 class CatalogModel {
-  static List<Item> items = List.empty() ;
+  static late List<Item> items;
+
+  // Get Item by ID
+  Item getById(int id) =>
+      items.firstWhere((element) => element.id == id, orElse: null);
+
+  // Get Item by position
+  Item getByPosition(int pos) => items[pos];
 }
 
 class Item {
@@ -13,7 +20,7 @@ class Item {
   final String image;
 
   Item({
-     required this.id,
+    required this.id,
     required this.name,
     required this.desc,
     required this.price,
@@ -51,7 +58,6 @@ class Item {
   }
 
   factory Item.fromMap(Map<String, dynamic> map) {
-    // ignore: unnecessary_null_comparison
     //if (map == null) return null;
 
     return Item(

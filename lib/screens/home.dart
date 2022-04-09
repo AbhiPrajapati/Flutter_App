@@ -20,11 +20,16 @@
 
 
 import 'package:augmented_reality/models/catalog.dart';
-import 'package:augmented_reality/widgets/drawer.dart';
-import 'package:augmented_reality/widgets/item_widget.dart';
+import 'package:augmented_reality/utils/routes.dart';
+
+import 'package:augmented_reality/widgets/home_widgets/catalog_header.dart';
+import 'package:augmented_reality/widgets/home_widgets/catalog_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+
+import 'package:velocity_x/velocity_x.dart';
 // import 'package:flutter_catalog/models/catalog.dart';
 // import 'package:flutter_catalog/widgets/drawer.dart';
 // import 'package:flutter_catalog/widgets/item_widget.dart';
@@ -37,7 +42,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final int days = 30;
 
-  final String name = "Codepur";
+  final String name = "Abhishek";
 
   @override
   void initState() {
@@ -60,23 +65,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Catalog App"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-            ? ListView.builder(
-                itemCount: CatalogModel.items.length,
-                itemBuilder: (context, index) => ItemWidget(
-                  item: CatalogModel.items[index],
-                ),
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
-      ),
-      drawer: MyDrawer(),
-    );
+        backgroundColor: context.canvasColor,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+          //backgroundColor: context.theme.buttonColor,
+          child: Icon(
+            CupertinoIcons.cart,
+            color: Colors.white,
+          ),
+        ),
+        body: SafeArea(
+          child: Container(
+            padding: Vx.m32,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CatalogHeader(),
+                if (CatalogModel.items.isNotEmpty)
+                  CatalogList().py16().expand()
+                else
+                  CircularProgressIndicator().centered().expand(),
+              ],
+            ),
+          ),
+        ));
   }
 }
